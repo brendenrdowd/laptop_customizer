@@ -1,12 +1,20 @@
-import React from 'react'
+import React from 'react';
+import slugify from 'slugify';
 
-export default function unitItem(props) {
-    return (
-      <fieldset className="feature" key={props.featureHash}>
-        <legend className="feature__name">
-          <h3>{props.feature}</h3>
-        </legend>
-        {props.options}
-      </fieldset>
-    )
+export default function UnitItem(props) {
+  return (
+    <div key={props.itemHash} className="feature__item">
+      <input
+        type="radio"
+        id={props.itemHash}
+        className="feature__option"
+        name={slugify(props.feature)}
+        checked={props.item.name === this.props.selected[props.feature].name}
+        onChange={e => props.updateFeature(props.feature, props.item)}
+      />
+      <label htmlFor={props.itemHash} className="feature__label">
+        {props.item.name} ({props.USCurrencyFormat.format(props.item.cost)})
+          </label>
+    </div>
+  )
 }
