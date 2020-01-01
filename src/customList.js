@@ -5,16 +5,16 @@ import UnitItem from './unitItem'
 export default function CustomList(props) {
   //this is taking every key from the store (i.e. processor) and mapping through that array
   //this is being used by app.js ln 86, so we'll need to access it? i think?
-  const features = Object.keys(this.props.features).map((feature, idx) => {
+  const features = Object.keys(props.features).map((feature, idx) => {
     //this is creating a key
     const featureHash = feature + '-' + idx;
     // this is grabing the feature keyword from our map ^
-    const options = this.props.features[feature].map(item => {
+    const options = props.features[feature].map(item => {
       //giving it an id
       const itemHash = slugify(JSON.stringify(item));
       return (
         //for each item in the array (2) we're creating a 'component'
-        <UnitItem itemHash={itemHash} feature={feature} item={item} updateFeature={props.updateFeature} />
+        <UnitItem itemHash={itemHash} feature={feature} item={item} {...props} />
       );
     })
     return (
@@ -26,4 +26,5 @@ export default function CustomList(props) {
       </fieldset>
     );
   });
+  return features;
 }
